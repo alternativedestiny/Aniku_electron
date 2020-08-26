@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- 引入样式 -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script> -->
+
+    <!-- import CSS -->
+    <link rel="stylesheet" href="./static/index.css">
+    <script type="text/javascript" src="./static/vue.js"></script>
+    <script type="text/javascript" src="./static/index.js"></script>
+</head>
+
+<body>
+    <br>
+    <div id="info" class="box">
+        <div>
+            软件名：{{ name }}
+        </div>
+        <div>版本：{{ version }}</div>
+    </div>
+    <br>
+    <div id="app1" class="box">
+        <el-button @click="visible = true">Button</el-button>
+        <el-dialog :visible.sync="visible" title="Hello world">
+            <p>Try Element</p>
+        </el-dialog>
+    </div>
+    <br>
+    <div id="app2">
+        <el-row :gutter="10">
+            <el-col :span="4">
+                <div>每行显示几个</div>
+                <!-- </el-col>
+            <el-col :span="5"> -->
+                <template>
+                    <el-input-number v-model="num" @change="handleChange" :min="2" :max="8" label="描述文字">
+                    </el-input-number>
+                </template>
+            </el-col>
+        </el-row>
+        <span>
+            <i class="el-icon-edit">编辑</i>
+            <span class="icon-name">edit</span>
+        </span>
+        <i class="el-icon-plus">增加</i>
+    </div>
+    <br>
+    <div id="app3">
+        <el-button plain @click="open1">
+            保存
+        </el-button>
+        <el-button plain @click="open2">
+            取消
+        </el-button>
+    </div>
+    <br>
+    <div id="app4">
+        <el-row :gutter="10">
+            <el-col :span="12">
+                <div class="box">
+                    <div class="inner" style="height: 120px;">
+                        <h3>显示列数</h3>
+                        <div>
+                            <el-slider v-model="value1" :step="2" :min="2" :max="8" @change="handleChange" show-input>
+                            </el-slider>
+                        </div>
+                    </div>
+                </div>
+            </el-col>
+            <el-col :span="12">
+                <div class="box">
+                    <div class="inner" style="height: 120px;">
+                        <h3>软件页面大小（重启生效）</H3>
+                        <el-radio-group v-model='radio' @change="radioChange">
+                            <el-radio :label="1">800*600&#160&#160&#160&#160</el-radio>
+                            <el-radio :label="2">1366*768 </el-radio>
+                            <el-radio :label="3">1920*1080</el-radio>
+                            <el-radio :label="4">2160*1440</el-radio>
+                            <el-radio :label="5">FullScreen</el-radio>
+                        </el-radio-group>
+                    </div>
+                </div>
+            </el-col>
+        </el-row>
+    </div>
+    <br>
+    <div class="box">
+        <div id="app5" class="inner">
+            <h3>图标显示方式</h3>
+            <el-row :gutter="10">
+                <el-col :span="14">
+                    <br>
+                    <el-radio-group v-model='radio' @change="radioChange">
+                        <el-radio :label="1">Fill</el-radio>
+                        <el-radio :label="2">Contain</el-radio>
+                        <el-radio :label="3">Cover</el-radio>
+                        <el-radio :label="4">None</el-radio>
+                        <el-radio :label="5">Scale-down</el-radio>
+                    </el-radio-group>
+                    <br>
+                    <br>
+                    <br>
+                    <span class="demonstration">宽度</span>
+                    <el-slider v-model="width" :step="10" :min="100" :max="300" @change="setWidth" show-input>
+                    </el-slider>
+                    <span class="demonstration">高度</span>
+                    <el-slider v-model="heigth" :step="10" :min="100" :max="300" @change="setHeigth" show-input>
+                    </el-slider>
+                </el-col>
+                <el-col :span="10" style="text-align: center;">
+                    <el-image :style="size" :src="img" :fit="fit"></el-image>
+                </el-col>
+            </el-row>
+        </div>
+        <div id="app6" class="inner">
+            <el-row :gutter="10">
+                <el-col :span="4" v-for="fit in fits" :key="fit">
+                    <span class="demonstration">{{ fit }}</span>
+                    <br>
+                    <el-image style="width: 120px; height: 120px" :src="url" :fit="fit"></el-image>
+                </el-col>
+            </el-row>
+        </div>
+    </div>
+</body>
+
+<script src='./renderer/setting.js'></script>
+
+<style>
+    .box {
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
+    }
+
+    .inner {
+        padding: 10px;
+        padding-left: 20px;
+    }
+
+    .auto_box {
+        padding: 20px;
+        height: 400px;
+        overflow: auto;
+    }
+</style>
+
+</html>

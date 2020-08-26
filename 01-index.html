@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <!-- <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; img-src 'self' https://img1.doubanio.com; script-src 'self'">
+  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+
+  <!-- import CSS -->
+  <link rel="stylesheet" href="./static/index.css">
+  <script type="text/javascript" src="./static/vue.js"></script>
+  <script type="text/javascript" src="./static/index.js"></script>
+
+  <title>Hello World!</title>
+</head>
+
+<body>
+  <h1>Hello World!</h1>
+  We are using Node.js <span id="node-version"></span>,
+  Chromium <span id="chrome-version"></span>,
+  and Electron <span id="electron-version"></span>.
+
+  <button id="open">open file</button>
+  <button id="save">save file</button>
+  <button id="message">show message</button>
+  <button id="notify">notify</button>
+  <button id="get">get info</button>
+  <button id="exe">open exe</button>
+  <button id="find">find film</button>
+  <div>
+    <div id="data"></div>
+    <img id="img" />
+    <img id="img2" />
+  </div>
+
+  <!-- 抽屉 -->
+  <div id="app10">
+    <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
+      点我打开
+    </el-button>
+
+    <el-drawer title="我是标题" :visible.sync="drawer" :with-header="false">
+      <span>我来啦!</span>
+    </el-drawer>
+  </div>
+  <br>
+
+  <div id="pic_list" style="text-align: center;">
+    <el-row :gutter="10">
+      <el-col :span="span" v-for="img in imgs" :key="img">
+        <el-image class="img" @click="openFile(img)" style="width: 120px; height: 120px" :src="img" :fit="fit"></el-image>
+      </el-col>
+    </el-row>
+    <el-button>加载更多...</el-button>
+  </div>
+
+  <!-- You can also require other files to run in this process -->
+  <script src="./renderer.js"></script>
+  <!-- <script src="./renderer/index.js"></script> -->
+
+
+</body>
+
+<script>
+
+  var main = {
+    data() {
+      return {
+        drawer: false,
+      };
+    }
+  };
+  var Ctor = Vue.extend(main)
+  new Ctor().$mount('#app10')
+</script>
+
+<style>
+  .img:hover {
+    background-color: black;
+  }
+</style>
+
+</html>

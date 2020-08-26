@@ -6,20 +6,39 @@
 // process.
 const fs = require('fs')
 const { dialog } = require('electron').remote
-const { shell } = require('electron')
+const { shell } = require('electron');
+const { METHODS } = require('http');
+
+// 读取json文件
+var set_info = fs.readFileSync('./cache/setting.json', 'utf-8', function (err, data) {
+    if (err) {
+        console.log("Read file error!");
+        console.log(err.message);
+    } else {
+        console.log("Read file success.");
+        // console.log(data);
+        return data;
+    }
+});
+set_info = JSON.parse(set_info);  // json数据格式化
 
 // 选择文件/文件夹
 let open = document.getElementById('open');
 open.onclick = function () {
     dialog.showOpenDialog({
         title: '选择文件夹',
-        // defaultPath: 'D:/PersonalProject/vue_press/docs/pages/images/',
-        filters: [{ name: '图片', extensions: ['jpg', 'png'] }],
+        defaultPath: './cache/',
         buttonLabel: '选择文件夹',
-        // properties: ['openFile', 'openDirectory']
+        properties: ['openDirectory']
     }).then(result => {
-        let img = document.getElementById('img');
-        img.setAttribute('src', result.filePaths[0]);
+        // let img = document.getElementById('img');
+        // img.setAttribute('src', result.filePaths[0]);
+        console.log(result.filePaths[0]);
+        let list = fs.readdirSync(result.filePaths[0]);
+        console.log(list.length);
+        for (let i = 0; i < list.length; i++) {
+            console.log(list[i]);
+        }
     }).catch(err => {
         console.log(err);
     })
@@ -71,26 +90,55 @@ input.onclick = function () {
 
 // 打开文件
 let exe = document.getElementById('exe');
-exe.onclick = function(){
+exe.onclick = function () {
     shell.openPath('D:/PersonalProject/Aniku_electron/test.txt');
 }
 
 // 爬虫
 let find = document.getElementById('find');
-find.onclick = function(){
+find.onclick = function () {
     let img2 = document.getElementById('img2');
     img2.setAttribute('src', 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2614500649.webp')
 
 }
 
 // 网络状态监听
-window.addEventListener('online', function(){
+window.addEventListener('online', function () {
     options.title = '网络链接';
     options.body = '网络已连接';
     new window.Notification(options.title, options);
 })
-window.addEventListener('offline', function(){
+window.addEventListener('offline', function () {
     options.title = '网络链接';
     options.body = '网络已断开';
     new window.Notification(options.title, options);
 })
+
+// pic_list
+let list = fs.readdirSync('D:/PersonalProject/Aniku_electron/cache/images/');
+let files = [];
+for (let i = 0; i < list.length; i++) {
+    if (list[i].indexOf('.') != -1) {
+        files.push('D:/PersonalProject/Aniku_electron/cache/images/' + list[i]);
+    }
+}
+let fits = ['fill', 'contain', 'cover', 'none', 'scale-down'];
+new Vue({
+    el: '#pic_list',
+    data: {
+        imgs: files,
+        fit: fits[set_info['fit']],
+        span: parseInt(24 / set_info['cols'])
+    },
+    methods: {
+        openFile(img) {
+            shell.openPath(img);
+            this.$notify({
+                title: '打开文件',
+                message: img + '正在打开',
+                type: 'success',
+                duration: 2000,
+            });
+        }
+    }
+});
