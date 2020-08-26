@@ -1,0 +1,11 @@
+{
+    "index": [{
+        "name": "abc",
+        "type": "film",
+        "number": 12
+    }, {
+        "name": "acd",
+        "type": "anime",
+        "number": 20
+    }]
+}

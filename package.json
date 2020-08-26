@@ -1,12 +1,12 @@
 {
-  "name": "electron-quick-start",
+  "name": "aniku_electron",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A local film manage soft",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/alternativedestiny/Aniku_electron",
   "keywords": [
     "Electron",
     "quick",
@@ -14,7 +14,7 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
+  "author": "hoppou~",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^9.2.0"

@@ -128,7 +128,9 @@ new Vue({
     data: {
         imgs: files,
         fit: fits[set_info['fit']],
-        span: parseInt(24 / set_info['cols'])
+        span: parseInt(24 / set_info['cols']),
+        width: set_info['width'],
+        height: set_info['height']
     },
     methods: {
         openFile(img) {

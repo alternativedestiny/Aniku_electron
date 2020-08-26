@@ -17,48 +17,7 @@
 
 <body>
     <br>
-    <div id="info" class="box">
-        <div>
-            软件名：{{ name }}
-        </div>
-        <div>版本：{{ version }}</div>
-    </div>
-    <br>
-    <div id="app1" class="box">
-        <el-button @click="visible = true">Button</el-button>
-        <el-dialog :visible.sync="visible" title="Hello world">
-            <p>Try Element</p>
-        </el-dialog>
-    </div>
-    <br>
-    <div id="app2">
-        <el-row :gutter="10">
-            <el-col :span="4">
-                <div>每行显示几个</div>
-                <!-- </el-col>
-            <el-col :span="5"> -->
-                <template>
-                    <el-input-number v-model="num" @change="handleChange" :min="2" :max="8" label="描述文字">
-                    </el-input-number>
-                </template>
-            </el-col>
-        </el-row>
-        <span>
-            <i class="el-icon-edit">编辑</i>
-            <span class="icon-name">edit</span>
-        </span>
-        <i class="el-icon-plus">增加</i>
-    </div>
-    <br>
-    <div id="app3">
-        <el-button plain @click="open1">
-            保存
-        </el-button>
-        <el-button plain @click="open2">
-            取消
-        </el-button>
-    </div>
-    <br>
+    <h2>软件设置</h2>
     <div id="app4">
         <el-row :gutter="10">
             <el-col :span="12">
@@ -75,7 +34,7 @@
             <el-col :span="12">
                 <div class="box">
                     <div class="inner" style="height: 120px;">
-                        <h3>软件页面大小（重启生效）</H3>
+                        <h3>软件启动大小（重启生效）</H3>
                         <el-radio-group v-model='radio' @change="radioChange">
                             <el-radio :label="1">800*600&#160&#160&#160&#160</el-radio>
                             <el-radio :label="2">1366*768 </el-radio>
@@ -91,40 +50,43 @@
     <br>
     <div class="box">
         <div id="app5" class="inner">
-            <h3>图标显示方式</h3>
             <el-row :gutter="10">
                 <el-col :span="14">
+                    <h3>图标显示方式</h3>
+                    <br>
+                    <span class="demonstration">图片宽度</span>
+                    <el-slider v-model="width" :step="1" :min="100" :max="300" @change="setWidth" show-input>
+                    </el-slider>
+                    <br>
+                    <span class="demonstration">图片高度</span>
+                    <el-slider v-model="height" :step="1" :min="100" :max="300" @change="setHeight" show-input>
+                    </el-slider>
+                    <br>
+                    <span class="demonstration">图片显示方式</span>
+                    <br>
                     <br>
                     <el-radio-group v-model='radio' @change="radioChange">
-                        <el-radio :label="1">Fill</el-radio>
-                        <el-radio :label="2">Contain</el-radio>
-                        <el-radio :label="3">Cover</el-radio>
-                        <el-radio :label="4">None</el-radio>
-                        <el-radio :label="5">Scale-down</el-radio>
+                        <el-radio :label="0">Fill</el-radio>
+                        <el-radio :label="1">Contain</el-radio>
+                        <el-radio :label="2">Cover</el-radio>
+                        <el-radio :label="3">None</el-radio>
+                        <el-radio :label="4">Scale-down</el-radio>
                     </el-radio-group>
-                    <br>
-                    <br>
-                    <br>
-                    <span class="demonstration">宽度</span>
-                    <el-slider v-model="width" :step="10" :min="100" :max="300" @change="setWidth" show-input>
-                    </el-slider>
-                    <span class="demonstration">高度</span>
-                    <el-slider v-model="heigth" :step="10" :min="100" :max="300" @change="setHeigth" show-input>
-                    </el-slider>
                 </el-col>
                 <el-col :span="10" style="text-align: center;">
-                    <el-image :style="size" :src="img" :fit="fit"></el-image>
+                    <!-- <img :style="{width: width+'px', height: width+'px'}" :src="img"></img> -->
+                    <el-image :style="{width: width+'px', height: height+'px'}" :src="img" :fit="fit"></el-image>
                 </el-col>
+                <!-- <div>
+                    <el-image :style="{width: width+'px', height: width+'px'}" :src="img" :fit="f"></el-image>
+                </div> -->
             </el-row>
         </div>
-        <div id="app6" class="inner">
-            <el-row :gutter="10">
-                <el-col :span="4" v-for="fit in fits" :key="fit">
-                    <span class="demonstration">{{ fit }}</span>
-                    <br>
-                    <el-image style="width: 120px; height: 120px" :src="url" :fit="fit"></el-image>
-                </el-col>
-            </el-row>
+        <div id="info" class="inner">
+            <h4>
+                软件名：{{ name }} &nbsp&nbsp&nbsp
+                版本：{{ version }}
+            </h4>
         </div>
     </div>
 </body>
@@ -145,6 +107,12 @@
         padding: 20px;
         height: 400px;
         overflow: auto;
+    }
+
+    img:hover {
+        filter: alpha(opacity=60);
+        -moz-opacity: 0.6;
+        opacity: 0.6;
     }
 </style>
 

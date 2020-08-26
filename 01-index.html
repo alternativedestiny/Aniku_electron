@@ -51,7 +51,10 @@
   <div id="pic_list" style="text-align: center;">
     <el-row :gutter="10">
       <el-col :span="span" v-for="img in imgs" :key="img">
-        <el-image class="img" @click="openFile(img)" style="width: 120px; height: 120px" :src="img" :fit="fit"></el-image>
+        <!-- <el-image @click="openFile(img)" style="width: 120px; height: 120px" :src="img" :fit="fit">
+        </el-image> -->
+        <el-image @click="openFile(img)" :style="{width: width+'px', height: height+'px'}" :src="img" :fit="fit">
+        </el-image>
       </el-col>
     </el-row>
     <el-button>加载更多...</el-button>
@@ -78,8 +81,15 @@
 </script>
 
 <style>
-  .img:hover {
-    background-color: black;
+  img {
+    object-fit: cover;
+  }
+
+  img:hover {
+    filter: alpha(opacity=60);
+    -moz-opacity: 0.6;
+    opacity: 0.6;
+    cursor: pointer;
   }
 </style>
 

@@ -1,5 +1,9 @@
 "use strict";
 
+var _data;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var fs = require('fs'); // 读取json文件
 
 
@@ -21,63 +25,8 @@ function writeSetting(key, val) {
   fs.writeFileSync('./cache/setting.json', t);
 } // console.log(set_info);
 // console.log(set_info['name']);
-// info 信息
+// app4: slider滑块
 
-
-new Vue({
-  el: '#info',
-  data: {
-    name: set_info['name'],
-    version: set_info["version"]
-  }
-}); // app1 弹框
-
-new Vue({
-  el: '#app1',
-  data: function data() {
-    return {
-      visible: false
-    };
-  }
-}); // app2 计数器
-
-var Main = {
-  data: function data() {
-    return {
-      num: 1
-    };
-  },
-  methods: {
-    handleChange: function handleChange(value) {
-      console.log(value);
-    }
-  }
-};
-var Ctor = Vue.extend(Main);
-new Ctor().$mount('#app2'); // app3 通知
-// new Vue().$mount('#app3')
-
-new Vue({
-  el: '#app3',
-  methods: {
-    open1: function open1() {
-      this.$notify({
-        title: '保存成功',
-        message: '设置保存成功',
-        type: 'success',
-        duration: 2000
-      });
-    },
-    open2: function open2() {
-      this.$notify.info({
-        title: '取消保存',
-        message: '设置未保存',
-        duration: 2000
-      });
-      location.reload(); // 刷新页面
-    }
-  }
-}); // app4: slider滑块
 
 new Vue({
   el: '#app4',
@@ -90,8 +39,8 @@ new Vue({
       console.log(value);
       writeSetting("cols", value);
       this.$notify({
-        title: '保存成功',
-        message: '设置保存成功',
+        title: '保存设置',
+        message: '设置保存设置',
         type: 'success',
         duration: 2000
       });
@@ -99,7 +48,7 @@ new Vue({
     radioChange: function radioChange(radio) {
       writeSetting("window", radio);
       this.$notify({
-        title: '保存成功',
+        title: '保存设置',
         message: '设置重启后生效',
         type: 'success',
         duration: 2000
@@ -111,24 +60,19 @@ new Vue({
 var fits = ['fill', 'contain', 'cover', 'none', 'scale-down'];
 new Vue({
   el: '#app5',
-  data: {
+  data: (_data = {
     radio: set_info['fit'],
     width: set_info['width'],
-    heigth: set_info['heigth'],
-    img: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-    size: {
-      width: set_info['width'] + "px",
-      heigth: set_info['heigth'] + "px"
-    },
-    fit: fits[set_info['fit'] - 1]
-  },
+    height: set_info['height'],
+    img: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+  }, _defineProperty(_data, "width", set_info['width']), _defineProperty(_data, "fit", fits[set_info['fit']]), _data),
   methods: {
-    radioChange: function radioChange(label) {
-      console.log(label);
-      writeSetting("fit", label);
+    radioChange: function radioChange(radio) {
+      console.log(radio);
+      writeSetting("fit", radio);
       this.$notify({
-        title: '保存成功',
-        message: '设置保存成功',
+        title: '保存设置',
+        message: '设置保存设置',
         type: 'success',
         duration: 2000
       });
@@ -137,36 +81,28 @@ new Vue({
     setWidth: function setWidth(width) {
       writeSetting("width", width);
       this.$notify({
-        title: '保存成功',
-        message: '设置保存成功',
+        title: '保存设置',
+        message: '设置保存设置',
         type: 'success',
         duration: 2000
       });
-
-      reload: this.reload;
     },
-    setHeigth: function setHeigth(heigth) {
-      writeSetting('heigth', heigth);
+    setHeight: function setHeight(height) {
+      writeSetting("height", height);
       this.$notify({
-        title: '保存成功',
-        message: '设置保存成功',
+        title: '保存设置',
+        message: '高度设置保存',
         type: 'success',
         duration: 2000
       });
-
-      reload: this.reload;
     }
   }
-}); // app6 图片显示方式
+}); // info 信息
 
-var Main = {
-  data: function data() {
-    return {
-      fits: fits,
-      url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-      span: parseInt(24 / set_info['cols'])
-    };
+new Vue({
+  el: '#info',
+  data: {
+    name: set_info['name'],
+    version: set_info["version"]
   }
-};
-var Ctor = Vue.extend(Main);
-new Ctor().$mount('#app6');
+});
