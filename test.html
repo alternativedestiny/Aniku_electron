@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,129 @@
     <script src="./static/vue.js"></script>
     <script src="./static/index.js"></script>
 </head>
+
 <body>
     <h1>test</h1>
-    
+    <button id="open">open file</button>
+    <button id="save">save file</button>
+    <button id="message">show message</button>
+    <button id="notify">notify</button>
+    <button id="get">get info</button>
+    <button id="exe">open exe</button>
+    <button id="find">find film</button>
+    <div>
+        <div id="data"></div>
+        <img id="img" />
+        <img id="img2" />
+    </div>
+
+    <!-- 抽屉 -->
+    <div id="app10">
+        <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
+            点我打开
+        </el-button>
+
+        <el-drawer title="我是标题" :visible.sync="drawer" :with-header="false">
+            <span>我来啦!</span>
+        </el-drawer>
+    </div>
+    <br>
+
 </body>
+
+<script>
+    // 选择文件/文件夹
+    let open = document.getElementById('open');
+    open.onclick = function () {
+        dialog.showOpenDialog({
+            title: '选择文件夹',
+            defaultPath: './cache/',
+            buttonLabel: '选择文件夹',
+            properties: ['openDirectory']
+        }).then(result => {
+            // let img = document.getElementById('img');
+            // img.setAttribute('src', result.filePaths[0]);
+            console.log(result.filePaths[0]);
+            let list = fs.readdirSync(result.filePaths[0]);
+            console.log(list.length);
+            for (let i = 0; i < list.length; i++) {
+                console.log(list[i]);
+            }
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    // 保存文件
+    let save = document.getElementById('save');
+    save.onclick = function () {
+        dialog.showSaveDialog({
+            title: '保存文件',
+            defaultPath: 'D:/PersonalProject/Aniku_electron/cache/'
+        }).then(result => {
+            fs.writeFileSync(result.filePath, 'avc');
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    // 消息提示
+    let message = document.getElementById('message');
+    message.onclick = function () {
+        dialog.showMessageBox({
+            type: 'warning',
+            title: '123',
+            message: '456',
+            buttons: ['a', 'b']
+        }).then(result => {
+            console.log(result);
+        })
+    }
+
+    // 系统通知
+    let notify = document.getElementById('notify');
+    let options = {
+        title: 'notify',
+        body: '你有一条通知'
+    }
+    notify.onclick = function () {
+        new window.Notification(options.title, options)
+    }
+
+    // 读取json文件
+    let input = document.getElementById('get');
+    let data1 = document.getElementById('data');
+    input.onclick = function () {
+        let json = require('D:/PersonalProject/Aniku_electron/cache/test.json');
+        data1.innerHTML = json.name
+    }
+
+    // 打开文件
+    let exe = document.getElementById('exe');
+    exe.onclick = function () {
+        shell.openPath('D:/PersonalProject/Aniku_electron/test.txt');
+    }
+
+    // 爬虫
+    let find = document.getElementById('find');
+    find.onclick = function () {
+        let img2 = document.getElementById('img2');
+        img2.setAttribute('src', 'https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2614500649.webp')
+
+    }
+
+    // 网络状态监听
+    window.addEventListener('online', function () {
+        options.title = '网络链接';
+        options.body = '网络已连接';
+        new window.Notification(options.title, options);
+    })
+    window.addEventListener('offline', function () {
+        options.title = '网络链接';
+        options.body = '网络已断开';
+        new window.Notification(options.title, options);
+    })
+
+</script>
+
 </html>

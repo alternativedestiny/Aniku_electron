@@ -46,12 +46,10 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js')
     }
   });
-  var homepage = '01-index.html';
-
-  if (1) {
-    homepage = '02-setting.html';
-  } // and load the index.html of the app.
-
+  var homepage = '01-index.html'; // if (1) {
+  //   homepage = 'test.html'
+  // }
+  // and load the index.html of the app.
 
   mainWindow.loadFile(homepage); // mainWindow.webContents.openDevTools(); // 调试窗口
 
@@ -109,6 +107,13 @@ app.whenReady().then(function () {
     // 快捷键
     click: function click() {
       mainWindow.loadFile('02-setting.html');
+    }
+  }, {
+    label: '测试',
+    accelerator: 'ctrl+t',
+    // 快捷键
+    click: function click() {
+      mainWindow.loadFile('test.html');
     }
   }];
   var m = Menu.buildFromTemplate(templete);

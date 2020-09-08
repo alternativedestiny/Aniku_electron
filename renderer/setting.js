@@ -28,7 +28,8 @@ new Vue({
     el: '#app4',
     data: {
         value1: set_info['cols'],
-        radio: set_info['window']
+        radio: set_info['window'],
+        color: set_info['color']
     },
     methods: {
         handleChange(value) {
@@ -37,6 +38,15 @@ new Vue({
             this.$notify({
                 title: '保存设置',
                 message: '设置保存设置',
+                type: 'success',
+                duration: 2000,
+            });
+        },
+        colorChange(color){
+            writeSetting("color", color);
+            this.$notify({
+                title: '保存设置',
+                message: '设置重启后生效',
                 type: 'success',
                 duration: 2000,
             });
@@ -53,17 +63,24 @@ new Vue({
     },
 });
 
-// app5 选择并保存图片显示方式
-let fits = ['fill', 'contain', 'cover', 'none', 'scale-down'];
+// info 信息
+new Vue({
+    el: '#info',
+    data: {
+        name: set_info['name'],
+        version: set_info["version"],
+    }
+});
+
+// app5 选择图片大小和显示方式
 new Vue({
     el: '#app5',
     data: {
+        fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
         radio: set_info['fit'],
         width: set_info['width'],
         height: set_info['height'],
         img: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-        width: set_info['width'],
-        fit: fits[set_info['fit']]
     },
     methods: {
         radioChange(radio) {
@@ -75,7 +92,6 @@ new Vue({
                 type: 'success',
                 duration: 2000,
             });
-            location.reload();
         },
         setWidth(width) {
             writeSetting("width", width);
@@ -98,11 +114,16 @@ new Vue({
     },
 });
 
-// info 信息
+
+// 动态组件
+Vue.use(httpVueLoader)
 new Vue({
-    el: '#info',
+    el: '#radio',
     data: {
-        name: set_info['name'],
-        version: set_info["version"],
+        tabView: 'cp1'
+    },
+    components: {
+        'cp1': httpVueLoader('./conponents/cp1.vue'),
+        'cp2': httpVueLoader('./conponents/cp2.vue')
     }
-});
+})

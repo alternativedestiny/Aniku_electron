@@ -36,9 +36,9 @@ function createWindow() {
   })
 
   let homepage = '01-index.html'
-  if (1) {
-    homepage = '02-setting.html'
-  }
+  // if (1) {
+  //   homepage = 'test.html'
+  // }
   // and load the index.html of the app.
   mainWindow.loadFile(homepage)
   // mainWindow.webContents.openDevTools(); // 调试窗口
@@ -101,6 +101,20 @@ app.whenReady().then(() => {
       accelerator: 'ctrl+n',  // 快捷键
       click: () => {
         mainWindow.loadFile('02-setting.html');
+      }
+    },
+    {
+      label: '增加',
+      accelerator: 'ctrl+a',  // 快捷键
+      click: () => {
+        mainWindow.loadFile('03-add.html');
+      }
+    },
+    {
+      label: '测试',
+      accelerator: 'ctrl+t',  // 快捷键
+      click: () => {
+        mainWindow.loadFile('test.html');
       }
     }
   ]

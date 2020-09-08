@@ -18,47 +18,77 @@
 </head>
 
 <body>
-  <h1>Hello World!</h1>
-  We are using Node.js <span id="node-version"></span>,
-  Chromium <span id="chrome-version"></span>,
-  and Electron <span id="electron-version"></span>.
 
-  <button id="open">open file</button>
-  <button id="save">save file</button>
-  <button id="message">show message</button>
-  <button id="notify">notify</button>
-  <button id="get">get info</button>
-  <button id="exe">open exe</button>
-  <button id="find">find film</button>
-  <div>
-    <div id="data"></div>
-    <img id="img" />
-    <img id="img2" />
-  </div>
-
-  <!-- 抽屉 -->
-  <div id="app10">
-    <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
-      点我打开
-    </el-button>
-
-    <el-drawer title="我是标题" :visible.sync="drawer" :with-header="false">
-      <span>我来啦!</span>
-    </el-drawer>
-  </div>
-  <br>
-
-  <div id="pic_list" style="text-align: center;">
-    <el-row :gutter="10">
-      <el-col :span="span" v-for="img in imgs" :key="img">
-        <!-- <el-image @click="openFile(img)" style="width: 120px; height: 120px" :src="img" :fit="fit">
-        </el-image> -->
-        <el-image @click="openFile(img)" :style="{width: width+'px', height: height+'px'}" :src="img" :fit="fit">
-        </el-image>
+  <div id="nav_menu" class="sidebar">
+    <el-row>
+      <el-col :span="24">
+        <el-menu default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+          <el-submenu index="1">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>导航一</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="1-1">选项1</el-menu-item>
+              <el-menu-item index="1-2">选项2</el-menu-item>
+              <el-menu-item index="1-3">选项3</el-menu-item>
+            </el-menu-item-group>
+            <el-submenu index="1-4">
+              <template slot="title">选项4</template>
+              <el-menu-item index="1-4-1">选项1</el-menu-item>
+            </el-submenu>
+          </el-submenu>
+          <el-menu-item index="2">
+            <i class="el-icon-menu"></i>
+            <span slot="title">导航二</span>
+          </el-menu-item>
+          </el-menu-item>
+          <el-menu-item index="4">
+            <i class="el-icon-setting"></i>
+            <span slot="title">导航四</span>
+          </el-menu-item>
+          <el-menu-item index="5" @click="add">
+            <i class="el-icon-plus"></i>
+            <span slot="title">添加</span>
+          </el-menu-item>
+        </el-menu>
       </el-col>
     </el-row>
-    <el-button>加载更多...</el-button>
+
   </div>
+
+  <div id="content">
+    <!-- 信息展示 -->
+    <div class="header">
+      <el-row>
+        <el-col :span="6">
+          <el-card style="margin: 10px;">
+            <el-image :src="img_header" @click="openFile(img)" style="width: 100%; height: 240px; display: block;"
+              :fit="fit"></el-image>
+          </el-card>
+        </el-col>
+        <el-col :span="18" style="padding: 30px;">
+          <h2>{{ img_header.split('/').pop() }}</h2>
+        </el-col>
+      </el-row>
+    </div>
+    <!-- 列表 -->
+    <div class="content">
+      <el-row>
+        <el-col :span="span" v-for="img in imgs" :key="img">
+          <el-card id="card_item" style="margin: 10px; padding: 0px;" shadow="hover">
+            <el-image :src="img" @click="changeHeader(img)" style=" width: 100%; display: block;" :fit="fit">
+            </el-image>
+            <!-- <img :src="imgs[0]" style="width: 100%; display: block;"> -->
+            <div style="padding-top: 14px; text-align: center;">
+              <span>{{ img.split('/').pop() }}</span>
+            </div>
+          </el-card>
+        </el-col>
+      </el-row>
+    </div>
+  </div>
+
 
   <!-- You can also require other files to run in this process -->
   <script src="./renderer.js"></script>
@@ -67,29 +97,59 @@
 
 </body>
 
-<script>
-
-  var main = {
-    data() {
-      return {
-        drawer: false,
-      };
-    }
-  };
-  var Ctor = Vue.extend(main)
-  new Ctor().$mount('#app10')
-</script>
-
 <style>
-  img {
-    object-fit: cover;
+  .sidebar {
+    position: fixed;
+    width: 200px;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    /* background-color: #eef1f6; */
   }
 
-  img:hover {
+  .header {
+    margin-left: 200px;
+    margin-right: 10px;
+    position: fixed;
+    width: calc(100% - 220px);
+    height: 300px;
+    background-color: #caddbb;
+  }
+
+  .content {
+    margin-left: 200px;
+    position: relative;
+    width: calc(100% - 200px);
+    top: 330px;
+    height: calc(100vh - 350px);
+    overflow: auto;
+    background: radial-gradient(ellipse at top left,
+        rgba(255, 255, 255, 1) 40%,
+        rgba(229, 229, 229, .9) 100%);
+  }
+
+  #card_item:hover {
     filter: alpha(opacity=60);
     -moz-opacity: 0.6;
     opacity: 0.6;
     cursor: pointer;
+  }
+
+  #pic_list {
+    text-align: center;
+  }
+
+  #pic {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+  }
+
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
   }
 </style>
 
