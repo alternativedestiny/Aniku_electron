@@ -7,7 +7,7 @@
 const fs = require('fs')
 const { shell, BrowserWindow } = require('electron');
 
-// 读取json文件
+// 读取json配置文件
 var set_info = fs.readFileSync('./cache/setting.json', 'utf-8', function (err, data) {
     if (err) {
         console.log("Read file error!");
