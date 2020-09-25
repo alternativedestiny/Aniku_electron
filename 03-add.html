@@ -15,54 +15,40 @@
     <div id="form">
         <el-form ref="form" :model="form" :rules="rules" label-width="100px" class="demo-ruleForm">
             <el-form-item label="名称" prop="name">
-                <el-input v-model="form.name" style="width: 50vw;"></el-input>
+                <el-input v-model="form.name" placeholder="输入项目名" style="width: 50vw;"></el-input>
             </el-form-item>
             <el-form-item label="路径" prop="path" label-width="100px">
-                <el-input v-model="form.path" style="width: 40vw;"></el-input>
-                <el-button type="primary" @click="">选择文件按<i class="el-icon-upload el-icon--right"></i></el-button>
+                <el-input v-model="form.path" placeholder="选择文件" style="width: 40vw;"></el-input>
+                <el-button type="primary" @click="seletFolder">选择文件按<i class="el-icon-upload el-icon--right"></i>
+                </el-button>
             </el-form-item>
             <el-form-item label="类型">
-                <el-radio-group v-model="form.resource">
+                <el-radio-group v-model="form.type">
                     <el-radio label="电影"></el-radio>
                     <el-radio label="动漫"></el-radio>
                     <el-radio label="电视剧"></el-radio>
                 </el-radio-group>
             </el-form-item>
+            <el-form-item label="文件类型">
+                <el-checkbox-group v-model="form.ftypes">
+                    <el-checkbox v-for="ftype in form.file_type" :label="ftype" :key="ftype">{{ftype}}</el-checkbox>
+                </el-checkbox-group>
+            </el-form-item>
+            <el-form-item label="设为首页">
+                <el-switch v-model="form.homepage"> </el-switch>
+            </el-form-item>
+            <el-form-item label="备注" prop="comment">
+                <el-input v-model="form.comment" placeholder="输入备注" style="width: 50vw;"></el-input>
+            </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="onSubmit">立即创建</el-button>
-                <el-button>取消</el-button>
+                <el-button @click="cancel">取消</el-button>
             </el-form-item>
         </el-form>
     </div>
+
 </body>
 
-<script>
-    new Vue({
-        el: form,
-        data: {
-            form: {
-                name: '',
-                path: '',
-                delivery: false,
-                type: [],
-                resource: ''
-            },
-            rules: {
-                name: [
-                    { required: true, message: '请输入活动名称', trigger: 'blur' },
-                    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-                ]
-            },
-        },
-        methods: {
-            seletFolder(){
-                
-            },
-            onSubmit() {
-                console.log('submit!');
-            }
-        }
-    })
-</script>
+<script src="./renderer/add.js"></script>
 
 </html>

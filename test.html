@@ -40,6 +40,9 @@
 </body>
 
 <script>
+    const fs = require('fs')
+    const { dialog } = require('electron').remote;
+    const { shell, BrowserWindow } = require('electron');
     // 选择文件/文件夹
     let open = document.getElementById('open');
     open.onclick = function () {

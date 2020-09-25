@@ -104,12 +104,24 @@ app.whenReady().then(() => {
       }
     },
     {
-      label: '增加',
-      accelerator: 'ctrl+a',  // 快捷键
+      label: '增加',  // 调试用, 在主界面打开
       click: () => {
         mainWindow.loadFile('03-add.html');
       }
     },
+    // {
+    //   label: '增加',  // 实际用, 新建窗口打开
+    //   click: () => {
+    //     newWindow = new BrowserWindow({
+    //       webPreferences: {
+    //         nodeIntegration: true,  // 增加全局使用node.js
+    //         enableRemoteModule: true,
+    //         preload: path.join(__dirname, 'preload.js')
+    //       }
+    //     })
+    //     newWindow.loadFile('03-add.html');
+    //   }
+    // },
     {
       label: '测试',
       accelerator: 'ctrl+t',  // 快捷键

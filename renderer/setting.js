@@ -1,4 +1,4 @@
-const fs = require('fs')
+const fs = require('fs');
 
 // 读取json文件
 var set_info = fs.readFileSync('./cache/setting.json', 'utf-8', function (err, data) {
@@ -16,7 +16,7 @@ set_info = JSON.parse(set_info);
 // 将配置文件写入配置文件
 function writeSetting(key, val) {
     set_info[key] = val;
-    var t = JSON.stringify(set_info);
+    var t = JSON.stringify(set_info, "", "\t");
     fs.writeFileSync('./cache/setting.json', t);
 }
 
@@ -42,7 +42,7 @@ new Vue({
                 duration: 2000,
             });
         },
-        colorChange(color){
+        colorChange(color) {
             writeSetting("color", color);
             this.$notify({
                 title: '保存设置',

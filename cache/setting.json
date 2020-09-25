@@ -1,1 +1,10 @@
-{"name":"Aniku_electron","version":"bata 1.0","fit":1,"width":400,"color":"#6AA9EB","cols":6,"window":4,"height":400}
+{
+    "name": "Aniku_electron",
+    "version": "bata 1.0",
+    "fit": 1,
+    "width": 267,
+    "color": "#6AA9EB",
+    "cols": 8,
+    "window": 2,
+    "height": 277
+}

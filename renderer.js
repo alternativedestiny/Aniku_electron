@@ -41,8 +41,8 @@ new Vue({
             console.log(key, keyPath);
         },
         add(){
-            addWindow = new BrowserWindow();
-            addWindow.loadFile('test.html');
+            // 新建窗口
+            window.open('03-add.html');
         }
     }
 })
