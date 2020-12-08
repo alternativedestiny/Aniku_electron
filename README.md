@@ -1,6 +1,6 @@
 # Aniku_Electron
 
-## It's a local film manage soft based on electron (一个基于Electron的影片管理软件)
+## 一个基于Electron的影片管理软件 (It's a local film manage soft based on electron)
 
 ## todo
 
