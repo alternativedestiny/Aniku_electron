@@ -12,6 +12,10 @@
 - [ ] 影片信息获取
 - [ ] 影片信息标记
 
+## 其他
+
+2020年12月14日迁移仓库至gitee
+
 ## License
 
 [CC0 1.0 (Public Domain)](LICENSE.md)
