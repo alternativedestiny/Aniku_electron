@@ -1,88 +1,9 @@
 {
-	"list": [
-		{
-			"name": "123",
-			"path": "123",
-			"type": "电影",
-			"homepage": false,
-			"comment": ""
-		},
-		{
-			"name": "hegf",
-			"path": "dfgh",
-			"type": "电影",
-			"homepage": false,
-			"comment": ""
-		},
-		{
-			"name": "123",
-			"path": "123",
-			"type": "电影",
-			"homepage": false,
-			"comment": ""
-		},
-		{
-			"name": "123",
-			"path": "123",
-			"type": "电影",
-			"homepage": false,
-			"comment": ""
-		},
-		{
-			"name": "123",
-			"path": "123",
-			"type": "电影",
-			"homepage": false,
-			"comment": ""
-		},
-		{
-			"name": "234",
-			"path": "234",
-			"type": "电影",
-			"homepage": false,
-			"comment": ""
-		},
-		{
-			"name": "123",
-			"path": "123",
-			"type": "电影",
-			"homepage": false,
-			"comment": ""
-		},
-		{
-			"name": "213",
-			"path": "321",
-			"type": "电影",
-			"homepage": false,
-			"comment": ""
-		},
-		{
-			"name": "234",
-			"path": "D:\\PersonalProject\\Aniku_electron\\cache\\images",
-			"type": "电影",
-			"homepage": false,
-			"comment": ""
-		},
-		{
-			"name": "123",
-			"path": "D:\\PersonalProject\\Aniku_electron\\cache\\images\\asfd",
-			"type": "电影",
-			"homepage": false,
-			"comment": ""
-		},
-		{
-			"name": "123",
-			"path": "D:\\PersonalProject\\Aniku_electron\\cache\\images",
-			"type": "电影",
-			"homepage": false,
-			"comment": ""
-		},
-		{
-			"name": "123",
-			"path": "D:\\PersonalProject\\Aniku_electron\\cache\\images",
-			"type": "电影",
-			"homepage": false,
-			"comment": ""
-		}
-	]
+	"list": [{
+		"name": "123",
+		"path": "123",
+		"type": "电影",
+		"homepage": false,
+		"comment": ""
+	}]
 }
